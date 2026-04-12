@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NÁŘEZÁKFEST</title>
+  <meta name="description" content="NÁŘEZÁKFEST – line-up kapel, galerie, vstupenky, partneři a kontakty." />
+  <style>
+    :root{
+      --bg:#050505;
+      --bg2:#0d0d0d;
+      --text:#f5f5f5;
+      --muted:#b9b9b9;
+      --line:rgba(255,255,255,.09);
+      --accent:#efe900;
+      --accent2:#b48cff;
+      --card:rgba(255,255,255,.04);
+      --shadow:0 20px 60px rgba(0,0,0,.45);
+      --radius:22px;
+      --max:1240px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(180,140,255,.14), transparent 28%),
+        radial-gradient(circle at top right, rgba(239,233,0,.10), transparent 24%),
+        linear-gradient(180deg, #050505 0%, #090909 100%);
+      color:var(--text);
+    }
+
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+
+    .wrap{width:min(var(--max), calc(100% - 32px)); margin:0 auto}
+
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(16px);
+      background:rgba(5,5,5,.72);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-in{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:18px; padding:16px 0;
+    }
+    .brand{
+      font-size:28px; font-weight:900; letter-spacing:.04em;
+      color:var(--accent);
+    }
+    .menu{
+      display:flex; gap:22px; flex-wrap:wrap;
+      color:#ddd; font-size:14px;
+    }
+    .menu a{opacity:.85}
+    .menu a:hover{opacity:1;color:#fff}
+
+    .hero{
+      min-height:92vh;
+      display:flex; align-items:center;
+      position:relative; overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.65)),
+        url('https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      opacity:.42;
+      transform:scale(1.03);
+    }
+    .hero:after{
+      content:"";
+      position:absolute; right:-140px; top:90px;
+      width:380px; height:380px;
+      background:radial-gradient(circle, rgba(180,140,255,.22), transparent 65%);
+      filter:blur(20px);
+    }
+    .hero-in{
+      position:relative; z-index:2;
+      display:grid; grid-template-columns: 1.25fr .75fr;
+      gap:28px; align-items:end;
+      width:min(var(--max), calc(100% - 32px)); margin:0 auto;
+      padding:82px 0 54px;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      padding:10px 14px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      color:#d7d7d7; font-size:12px; letter-spacing:.24em;
+      background:rgba(255,255,255,.04);
+      margin-bottom:18px;
+    }
+    h1{
+      margin:0;
+      font-size:clamp(52px, 10vw, 118px);
+      line-height:.92;
+      font-weight:900;
+      letter-spacing:.01em;
+      text-transform:uppercase;
+    }
+    .lead{
+      max-width:760px;
+      margin:22px 0 0;
+      color:var(--muted);
+      font-size:19px;
+      line-height:1.7;
+    }
+    .hero-btns{
+      display:flex; gap:14px; flex-wrap:wrap;
+      margin-top:30px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      min-height:54px; padding:0 24px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      transition:.22s ease;
+      font-weight:700;
+    }
+    .btn-primary{
+      background:var(--accent);
+      color:#000;
+      border-color:transparent;
+    }
+    .btn-primary:hover{transform:translateY(-2px)}
+    .btn-secondary{
+      background:rgba(255,255,255,.04);
+      color:#fff;
+    }
+    .btn-secondary:hover{background:rgba(255,255,255,.08)}
+
+    .hero-card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius:28px;
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+    .hero-grid{
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+    .mini{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(0,0,0,.22);
+      padding:16px;
+      min-height:96px;
+    }
+    .mini .k{
+      font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.18em;
+      margin-bottom:8px;
+    }
+    .mini .v{
+      font-size:22px; font-weight:800;
+    }
+
+    section{padding:88px 0}
+    .section-head{
+      display:flex; justify-content:space-between; align-items:end; gap:18px;
+      margin-bottom:28px;
+    }
+    .section-k{
+      color:var(--muted); font-size:12px; letter-spacing:.26em; text-transform:uppercase;
+      margin-bottom:10px;
+    }
+    h2{
+      margin:0;
+      font-size:clamp(30px, 4.5vw, 58px);
+      text-transform:uppercase;
+      line-height:1;
+    }
+    .section-note{
+      max-width:520px; color:var(--muted); line-height:1.7;
+    }
+
+    .cards{
+      display:grid; gap:16px;
+    }
+    .lineup{
+      grid-template-columns:repeat(2, minmax(0,1fr));
+    }
+    .card{
+      border:1px solid var(--line);
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:22px;
+      transition:.22s ease;
+      box-shadow:var(--shadow);
+    }
+    .card:hover{
+      transform:translateY(-4px);
+      background:rgba(255,255,255,.06);
+    }
+    .time{
+      color:var(--accent);
+      font-size:13px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      margin-bottom:10px;
+      font-weight:700;
+    }
+    .band{
+      font-size:32px; font-weight:900;
+      margin:0 0 8px;
+    }
+    .sub{color:var(--muted); line-height:1.6}
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:16px;
+    }
+    .ph{
+      aspect-ratio: 4 / 3;
+      border-radius:22px;
+      border:1px solid var(--line);
+      overflow:hidden;
+      position:relative;
+      box-shadow:var(--shadow);
+      background:#111;
+    }
+    .ph img{
+      width:100%; height:100%; object-fit:cover;
+      transition:transform .35s ease;
+    }
+    .ph:hover img{transform:scale(1.05)}
+    .ph span{
+      position:absolute; left:14px; bottom:14px;
+      background:rgba(0,0,0,.45);
+      border:1px solid rgba(255,255,255,.15);
+      padding:8px 12px; border-radius:999px;
+      font-size:12px;
+    }
+
+    .tickets-wrap{
+      display:grid; grid-template-columns:.9fr 1.1fr; gap:18px;
+    }
+    .ticket-list{
+      display:grid; gap:12px;
+    }
+    .ticket{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:18px 20px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      font-size:18px;
+      box-shadow:var(--shadow);
+    }
+    .ticket strong{font-size:30px}
+    .ticket-cta{
+      display:flex; align-items:center; justify-content:center;
+      min-height:100%;
+      border-radius:28px;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(circle at top right, rgba(180,140,255,.22), transparent 35%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      padding:28px;
+      box-shadow:var(--shadow);
+    }
+    .ticket-cta-in{max-width:400px}
+    .ticket-cta p{color:var(--muted); line-height:1.7}
+
+    .partners{
+      display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:16px;
+    }
+    .partner{
+      min-height:120px;
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:rgba(255,255,255,.03);
+      display:flex; align-items:center; justify-content:center;
+      color:#ddd; font-size:26px; font-weight:800;
+      box-shadow:var(--shadow);
+    }
+
+    .contact{
+      display:grid; grid-template-columns:1fr 1fr; gap:18px;
+    }
+    .contact .box{
+      border:1px solid var(--line);
+      border-radius:26px;
+      background:rgba(255,255,255,.04);
+      padding:26px;
+      box-shadow:var(--shadow);
+    }
+    .box .label{
+      color:var(--muted); text-transform:uppercase; letter-spacing:.18em;
+      font-size:12px; margin-bottom:10px;
+    }
+    .box .value{
+      font-size:26px; font-weight:800; line-height:1.4;
+    }
+    .socials{
+      display:flex; gap:12px; flex-wrap:wrap; margin-top:16px;
+    }
+    .socials a{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      border-radius:999px;
+      padding:12px 16px;
+      font-weight:700;
+    }
+
+    footer{
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      padding:28px 0 44px;
+      text-align:center;
+    }
+
+    .fade{
+      opacity:0;
+      transform:translateY(26px);
+      animation:up .8s ease forwards;
+    }
+    .fade.d2{animation-delay:.12s}
+    .fade.d3{animation-delay:.24s}
+    .fade.d4{animation-delay:.36s}
+
+    @keyframes up{
+      to{opacity:1; transform:translateY(0)}
+    }
+
+    @media (max-width: 980px){
+      .hero-in,
+      .tickets-wrap,
+      .contact{
+        grid-template-columns:1fr;
+      }
+      .lineup,
+      .gallery,
+      .partners{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px){
+      .menu{display:none}
+      .hero{min-height:auto}
+      .hero-in{padding-top:56px}
+      .hero-grid{grid-template-columns:1fr}
+      .lineup,
+      .gallery,
+      .partners{
+        grid-template-columns:1fr;
+      }
+      .band{font-size:26px}
+      .ticket strong{font-size:24px}
+      .box .value{font-size:21px}
+      section{padding:66px 0}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav">
+    <div class="wrap nav-in">
+      <a href="#top" class="brand">NÁŘEZÁKFEST</a>
+      <nav class="menu">
+        <a href="#info">Info</a>
+        <a href="#lineup">Line-up</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#vstupenky">Vstupenky</a>
+        <a href="#partneri">Partneři</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </div>
+
+  <header class="hero" id="top">
+    <div class="hero-in">
+      <div class="fade">
+        <div class="eyebrow">Festival zábavových kapel</div>
+        <h1>NÁŘEZÁKFEST</h1>
+        <p class="lead">
+          Večer plný energie, živé hudby a festivalové atmosféry. Tohle je pracovní text, který ti pak přepíšu přesně podle finálního zadání.
+        </p>
+        <div class="hero-btns">
+          <a class="btn btn-primary" href="#vstupenky">Vstupenky</a>
+          <a class="btn btn-secondary" href="#lineup">Zobrazit line-up</a>
+        </div>
+      </div>
+
+      <div class="hero-card fade d2">
+        <div class="hero-grid">
+          <div class="mini">
+            <div class="k">Místo</div>
+            <div class="v">Dolní Kralovice</div>
+          </div>
+          <div class="mini">
+            <div class="k">Datum</div>
+            <div class="v">21. 3. 2026</div>
+          </div>
+          <div class="mini">
+            <div class="k">Doors</div>
+            <div class="v">20:00</div>
+          </div>
+          <div class="mini">
+            <div class="k">Předprodej</div>
+            <div class="v">od 150 Kč</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="info">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-k">O festivalu</div>
+          <h2>Info</h2>
+        </div>
+        <div class="section-note">
+          Tady bude popis akce, který dodáš později. Klidně delší text, krátký příběh festivalu nebo proč přijít.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lineup">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-k">Program</div>
+          <h2>Line-up kapel</h2>
+        </div>
+        <div class="section-note">
+          Kapely a časy jen doplním podle tebe. Rozvržení už zůstane.
+        </div>
+      </div>
+
+      <div class="cards lineup">
+        <div class="card fade">
+          <div class="time">20:30</div>
+          <h3 class="band">Kapela 1</h3>
+          <div class="sub">Krátký popis nebo styl kapely.</div>
+        </div>
+
+        <div class="card fade d2">
+          <div class="time">21:30</div>
+          <h3 class="band">Kapela 2</h3>
+          <div class="sub">Krátký popis nebo styl kapely.</div>
+        </div>
+
+        <div class="card fade d3">
+          <div class="time">22:30</div>
+          <h3 class="band">Kapela 3</h3>
+          <div class="sub">Krátký popis nebo styl kapely.</div>
+        </div>
+
+        <div class="card fade d4">
+          <div class="time">23:30</div>
+          <h3 class="band">Kapela 4</h3>
+          <div class="sub">Krátký popis nebo styl kapely.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="galerie">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-k">Atmosféra</div>
+          <h2>Galerie</h2>
+        </div>
+        <div class="section-note">
+          Zatím jsou tam ilustrační fotky. Pak je vyměníme za tvoje.
+        </div>
+      </div>
+
+      <div class="gallery">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1200&q=80" alt=""><span>Foto 1</span></div>
+        <div class="ph"><img src="https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=1200&q=80" alt=""><span>Foto 2</span></div>
+        <div class="ph"><img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80" alt=""><span>Foto 3</span></div>
+        <div class="ph"><img src="https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?auto=format&fit=crop&w=1200&q=80" alt=""><span>Foto 4</span></div>
+        <div class="ph"><img src="https://images.unsplash.com/photo-1501612780327-45045538702b?auto=format&fit=crop&w=1200&q=80" alt=""><span>Foto 5</span></div>
+        <div class="ph"><img src="https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?auto=format&fit=crop&w=1200&q=80" alt=""><span>Foto 6</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="vstupenky">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-k">Předprodej</div>
+          <h2>Ceny vstupenek</h2>
+        </div>
+        <div class="section-note">
+          Tlačítku pak jen vyměníme odkaz na nový SMS Ticket.
+        </div>
+      </div>
+
+      <div class="tickets-wrap">
+        <div class="ticket-list">
+          <div class="ticket"><span>1. vlna</span><strong>150 Kč</strong></div>
+          <div class="ticket"><span>2. vlna</span><strong>180 Kč</strong></div>
+          <div class="ticket"><span>Na místě</span><strong>200 Kč</strong></div>
+        </div>
+
+        <div class="ticket-cta">
+          <div class="ticket-cta-in">
+            <h3 style="margin-top:0;font-size:34px;text-transform:uppercase;">Kup si vstup</h3>
+            <p>Sem přijde finální externí odkaz na prodej vstupenek. Zbytek už řešit nebudeš.</p>
+            <a class="btn btn-primary" href="#" target="_blank">SMS Ticket</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="partneri">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-k">Podpora akce</div>
+          <h2>Partneři / sponzoři</h2>
+        </div>
+        <div class="section-note">
+          Zatím textové placeholdery, pak nahradíme logy.
+        </div>
+      </div>
+
+      <div class="partners">
+        <div class="partner">PARTNER</div>
+        <div class="partner">PARTNER</div>
+        <div class="partner">PARTNER</div>
+        <div class="partner">PARTNER</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-k">Spojení</div>
+          <h2>Kontakt</h2>
+        </div>
+        <div class="section-note">
+          E-mail, sociální sítě a další údaje přepíšu podle tebe.
+        </div>
+      </div>
+
+      <div class="contact">
+        <div class="box">
+          <div class="label">Kontaktní údaje</div>
+          <div class="value">info@narezakfest.com</div>
+          <div class="value">Dolní Kralovice</div>
+        </div>
+
+        <div class="box">
+          <div class="label">Sociální sítě</div>
+          <div class="socials">
+            <a href="#" target="_blank">Instagram</a>
+            <a href="#" target="_blank">Facebook</a>
+            <a href="#" target="_blank">SMS Ticket</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      NÁŘEZÁKFEST © 2026
+    </div>
+  </footer>
+
+</body>
+</html>
