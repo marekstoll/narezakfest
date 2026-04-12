@@ -177,7 +177,10 @@
       line-height:1;
     }
     .section-note{
-      max-width:520px; color:var(--muted); line-height:1.7;
+      max-width:620px;
+      color:var(--muted);
+      line-height:1.8;
+      font-size:20px;
     }
 
     .cards{
@@ -212,6 +215,31 @@
     }
     .sub{color:var(--muted); line-height:1.6}
 
+    .info-media{
+      width:100%;
+      max-width:720px;
+      margin-top:28px;
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.09);
+      box-shadow:0 20px 60px rgba(0,0,0,.45);
+    }
+    .info-video{
+      position:relative;
+      padding-bottom:56.25%;
+      height:0;
+      overflow:hidden;
+      background:#000;
+    }
+    .info-video iframe{
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
     .gallery{
       display:grid;
       grid-template-columns:repeat(3, minmax(0,1fr));
@@ -227,17 +255,12 @@
       background:#111;
     }
     .ph img{
-      width:100%; height:100%; object-fit:cover;
+      width:100%;
+      height:100%;
+      object-fit:cover;
       transition:transform .35s ease;
     }
     .ph:hover img{transform:scale(1.05)}
-    .ph span{
-      position:absolute; left:14px; bottom:14px;
-      background:rgba(0,0,0,.45);
-      border:1px solid rgba(255,255,255,.15);
-      padding:8px 12px; border-radius:999px;
-      font-size:12px;
-    }
 
     .tickets-wrap{
       display:grid; grid-template-columns:.9fr 1.1fr; gap:18px;
@@ -280,6 +303,8 @@
       display:flex; align-items:center; justify-content:center;
       color:#ddd; font-size:26px; font-weight:800;
       box-shadow:var(--shadow);
+      text-align:center;
+      padding:18px;
     }
 
     .contact{
@@ -356,6 +381,7 @@
       .band{font-size:26px}
       .ticket strong{font-size:24px}
       .box .value{font-size:21px}
+      .section-note{font-size:18px}
       section{padding:66px 0}
     }
   </style>
@@ -421,7 +447,17 @@
           <h2>Info</h2>
         </div>
         <div class="section-note">
-          Po prvním úspěšném ročníku na jaře jsme se rozhodli vyplout vstříc nové párty a tou je NÁŘEZÁ FEST Summer Ultra Edition! Ideální příležitost sjet Sázavu a zakotvit v Kácově na pařbu!
+          Po prvním úspěšném ročníku na jaře jsme se rozhodli vyplout vstříc nové párty — a tou je NÁŘEZÁK FEST Summer Ultra Edition! Ideální příležitost sjet Sázavu a zakotvit v Kácově na pařbu!
+          <div class="info-media">
+            <div class="info-video">
+              <iframe
+                src="https://www.youtube.com/embed/QqBvuIiqPLo"
+                title="NÁŘEZÁKFEST video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -471,18 +507,15 @@
           <div class="section-k">Atmosféra</div>
           <h2>Galerie</h2>
         </div>
-        <div class="section-note">
-          Zatím jsou tam ilustrační fotky. Pak je vyměníme za tvoje.
-        </div>
       </div>
 
       <div class="gallery">
-        <div class="ph"><img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1200&q=80" alt=""><span>Foto 1</span></div>
-        <div class="ph"><img src="https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=1200&q=80" alt=""><span>Foto 2</span></div>
-        <div class="ph"><img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80" alt=""><span>Foto 3</span></div>
-        <div class="ph"><img src="https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?auto=format&fit=crop&w=1200&q=80" alt=""><span>Foto 4</span></div>
-        <div class="ph"><img src="https://images.unsplash.com/photo-1501612780327-45045538702b?auto=format&fit=crop&w=1200&q=80" alt=""><span>Foto 5</span></div>
-        <div class="ph"><img src="https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?auto=format&fit=crop&w=1200&q=80" alt=""><span>Foto 6</span></div>
+        <div class="ph"><img src="https://github.com/user-attachments/assets/ee0104ed-3353-4e35-9fd5-b3a259943169" alt="Foto 1"></div>
+        <div class="ph"><img src="https://github.com/user-attachments/assets/649c4496-2120-4257-a40c-603537654bd7" alt="Foto 2"></div>
+        <div class="ph"><img src="https://github.com/user-attachments/assets/a087e709-7170-4bc9-82b1-337fb5063fd4" alt="Foto 3"></div>
+        <div class="ph"><img src="https://github.com/user-attachments/assets/7e380b8f-3eee-46ed-bc13-ed3a0897bd16" alt="Foto 4"></div>
+        <div class="ph"><img src="https://github.com/user-attachments/assets/3c9ac1f1-6c3f-47e9-a6fb-79aa0b741d08" alt="Foto 5"></div>
+        <div class="ph"><img src="https://github.com/user-attachments/assets/ceeece36-28f4-413a-81ed-fd06e54b87b2" alt="Foto 6"></div>
       </div>
     </div>
   </section>
