@@ -183,6 +183,40 @@
       font-size:20px;
     }
 
+    .info-layout{
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:28px;
+      align-items:start;
+    }
+    .info-left{
+      display:flex;
+      flex-direction:column;
+      gap:22px;
+    }
+    .info-video-wrap{
+      width:100%;
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.09);
+      box-shadow:0 20px 60px rgba(0,0,0,.45);
+      background:#000;
+    }
+    .info-video{
+      position:relative;
+      padding-bottom:56.25%;
+      height:0;
+      overflow:hidden;
+    }
+    .info-video iframe{
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
     .cards{
       display:grid; gap:16px;
     }
@@ -214,31 +248,6 @@
       margin:0 0 8px;
     }
     .sub{color:var(--muted); line-height:1.6}
-
-    .info-media{
-      width:100%;
-      max-width:720px;
-      margin-top:28px;
-      border-radius:22px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.09);
-      box-shadow:0 20px 60px rgba(0,0,0,.45);
-    }
-    .info-video{
-      position:relative;
-      padding-bottom:56.25%;
-      height:0;
-      overflow:hidden;
-      background:#000;
-    }
-    .info-video iframe{
-      position:absolute;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      border:0;
-    }
 
     .gallery{
       display:grid;
@@ -290,7 +299,6 @@
       box-shadow:var(--shadow);
     }
     .ticket-cta-in{max-width:400px}
-    .ticket-cta p{color:var(--muted); line-height:1.7}
 
     .partners{
       display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:16px;
@@ -358,7 +366,8 @@
     @media (max-width: 980px){
       .hero-in,
       .tickets-wrap,
-      .contact{
+      .contact,
+      .info-layout{
         grid-template-columns:1fr;
       }
       .lineup,
@@ -441,22 +450,25 @@
 
   <section id="info">
     <div class="wrap">
-      <div class="section-head">
-        <div>
-          <div class="section-k">O festivalu</div>
-          <h2>Info</h2>
+      <div class="info-layout">
+        <div class="info-left">
+          <div>
+            <div class="section-k">O festivalu</div>
+            <h2>Info</h2>
+          </div>
+          <div class="section-note">
+            Po prvním úspěšném ročníku na jaře jsme se rozhodli vyplout vstříc nové párty — a tou je NÁŘEZÁK FEST Summer Ultra Edition! Ideální příležitost sjet Sázavu a zakotvit v Kácově na pařbu!
+          </div>
         </div>
-        <div class="section-note">
-          Po prvním úspěšném ročníku na jaře jsme se rozhodli vyplout vstříc nové párty — a tou je NÁŘEZÁK FEST Summer Ultra Edition! Ideální příležitost sjet Sázavu a zakotvit v Kácově na pařbu!
-          <div class="info-media">
-            <div class="info-video">
-              <iframe
-                src="https://www.youtube.com/embed/QqBvuIiqPLo"
-                title="NÁŘEZÁKFEST video"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen>
-              </iframe>
-            </div>
+
+        <div class="info-video-wrap">
+          <div class="info-video">
+            <iframe
+              src="https://www.youtube.com/embed/QqBvuIiqPLo"
+              title="NÁŘEZÁKFEST video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
           </div>
         </div>
       </div>
