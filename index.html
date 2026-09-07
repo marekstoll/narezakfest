@@ -293,6 +293,23 @@ z-index:1;
   height:auto;
   object-fit:contain;
 }
+    .stinovlas-logo-wrap .band-logo{
+  filter:
+    drop-shadow(1px 0 0 #000)
+    drop-shadow(-1px 0 0 #000)
+    drop-shadow(0 1px 0 #000)
+    drop-shadow(0 -1px 0 #000);
+}
+
+.klice-logo-wrap{
+  background:radial-gradient(
+    ellipse at center,
+    rgba(110,110,110,.25) 0%,
+    rgba(70,70,70,.14) 45%,
+    rgba(0,0,0,0) 75%
+  );
+  border-radius:50%;
+}
     .gallery{
   display:grid;
   grid-template-columns:repeat(3, minmax(0,1fr));
@@ -616,7 +633,7 @@ z-index:1;
     <h3 class="band">ZTRACENÝ KLÍČE</h3>
     <div class="sub">Taneční kapela z Vysočiny</div>
   </div>
-  <div class="band-logo-wrap">
+  <div class="band-logo-wrap klice-logo-wrap">
     <img class="band-logo" src="images/klice bila.png.PNG" alt="ZTRACENÝ KLÍČE">
   </div>
 </a>
