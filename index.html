@@ -132,7 +132,178 @@
       --radius:22px;
       --max:1240px;
     }
+  .cookie-consent[hidden],
+  .cookie-consent__details[hidden],
+  .cookie-settings-button[hidden]{
+    display:none !important;
+  }
 
+  .cookie-consent{
+    position:fixed;
+    left:16px;
+    right:16px;
+    bottom:16px;
+    z-index:10000;
+    display:flex;
+    justify-content:center;
+  }
+
+  .cookie-consent__panel{
+    width:min(860px,100%);
+    padding:22px;
+    color:var(--text);
+    background:rgba(13,13,13,.98);
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+  }
+
+  .cookie-consent__top{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:24px;
+  }
+
+  .cookie-consent__copy{
+    flex:1 1 420px;
+  }
+
+  .cookie-consent__copy h2{
+    margin:0 0 8px;
+    font-size:22px;
+  }
+
+  .cookie-consent__copy p{
+    margin:0;
+    color:var(--muted);
+    line-height:1.55;
+  }
+
+  .cookie-consent__actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  .cookie-consent__button,
+  .cookie-settings-button{
+    appearance:none;
+    border:1px solid rgba(255,255,255,.25);
+    font:inherit;
+    font-weight:800;
+    cursor:pointer;
+  }
+
+  .cookie-consent__button{
+    min-height:44px;
+    padding:11px 16px;
+    color:var(--text);
+    background:#222;
+    border-radius:999px;
+  }
+
+  .cookie-consent__button:hover,
+  .cookie-settings-button:hover{
+    border-color:var(--accent);
+  }
+
+  .cookie-consent__accept,
+  .cookie-consent__save{
+    color:#050505;
+    background:var(--accent);
+    border-color:var(--accent);
+  }
+
+  .cookie-consent__customize{
+    background:transparent;
+  }
+
+  .cookie-consent__details{
+    margin-top:18px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+  }
+
+  .cookie-consent__option{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    padding:12px 0;
+  }
+
+  .cookie-consent__option + .cookie-consent__option{
+    border-top:1px solid var(--line);
+  }
+
+  .cookie-consent__option-text{
+    display:grid;
+    gap:4px;
+  }
+
+  .cookie-consent__option small{
+    color:var(--muted);
+    line-height:1.45;
+  }
+
+  .cookie-consent__always{
+    color:var(--accent);
+    font-weight:800;
+    white-space:nowrap;
+  }
+
+  .cookie-consent__toggle{
+    width:22px;
+    height:22px;
+    flex:0 0 auto;
+    accent-color:var(--accent);
+  }
+
+  .cookie-consent__save-row{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:12px;
+  }
+
+  .cookie-settings-button{
+    position:fixed;
+    right:14px;
+    bottom:14px;
+    z-index:9999;
+    padding:9px 13px;
+    color:var(--text);
+    background:#171717;
+    border-radius:999px;
+  }
+
+  @media(max-width:700px){
+    .cookie-consent{
+      left:10px;
+      right:10px;
+      bottom:10px;
+    }
+
+    .cookie-consent__panel{
+      padding:18px;
+    }
+
+    .cookie-consent__top{
+      display:block;
+    }
+
+    .cookie-consent__actions{
+      margin-top:16px;
+    }
+
+    .cookie-consent__button{
+      flex:1 1 100%;
+    }
+
+    .cookie-consent__option{
+      align-items:flex-start;
+    }
+  }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
@@ -877,6 +1048,237 @@ z-index:1;
       NÁŘEZÁKFEST © 2026
     </div>
   </footer>
+<button
+  type="button"
+  class="cookie-settings-button"
+  id="cookieSettingsButton"
+  aria-label="Otevřít nastavení cookies"
+  hidden
+>
+  Nastavení cookies
+</button>
 
+<section
+  class="cookie-consent"
+  id="cookieConsent"
+  role="dialog"
+  aria-labelledby="cookieConsentTitle"
+  aria-describedby="cookieConsentText"
+  hidden
+>
+  <div class="cookie-consent__panel">
+    <div class="cookie-consent__top">
+      <div class="cookie-consent__copy">
+        <h2 id="cookieConsentTitle">Cookies a soukromí</h2>
+        <p id="cookieConsentText">
+          Nezbytné úložiště používáme pro zapamatování vaší volby.
+          Google Analytics spustíme pouze s vaším souhlasem.
+        </p>
+      </div>
+
+      <div class="cookie-consent__actions">
+        <button
+          type="button"
+          class="cookie-consent__button cookie-consent__accept"
+          id="cookieAccept"
+        >
+          Přijmout
+        </button>
+
+        <button
+          type="button"
+          class="cookie-consent__button"
+          id="cookieReject"
+        >
+          Odmítnout
+        </button>
+
+        <button
+          type="button"
+          class="cookie-consent__button cookie-consent__customize"
+          id="cookieCustomize"
+          aria-expanded="false"
+          aria-controls="cookieDetails"
+        >
+          Nastavení
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="cookie-consent__details"
+      id="cookieDetails"
+      hidden
+    >
+      <div class="cookie-consent__option">
+        <span class="cookie-consent__option-text">
+          <strong>Nezbytné úložiště</strong>
+          <small>Slouží pouze k zapamatování vaší volby.</small>
+        </span>
+        <span class="cookie-consent__always">Vždy aktivní</span>
+      </div>
+
+      <label class="cookie-consent__option" for="cookieAnalytics">
+        <span class="cookie-consent__option-text">
+          <strong>Analytické cookies</strong>
+          <small>
+            Pomáhají nám anonymně měřit návštěvnost pomocí Google Analytics 4.
+          </small>
+        </span>
+        <input
+          class="cookie-consent__toggle"
+          id="cookieAnalytics"
+          type="checkbox"
+        >
+      </label>
+
+      <div class="cookie-consent__save-row">
+        <button
+          type="button"
+          class="cookie-consent__button cookie-consent__save"
+          id="cookieSave"
+        >
+          Uložit volbu
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const banner = document.getElementById("cookieConsent");
+    const settingsButton = document.getElementById("cookieSettingsButton");
+    const acceptButton = document.getElementById("cookieAccept");
+    const rejectButton = document.getElementById("cookieReject");
+    const customizeButton = document.getElementById("cookieCustomize");
+    const details = document.getElementById("cookieDetails");
+    const analyticsCheckbox = document.getElementById("cookieAnalytics");
+    const saveButton = document.getElementById("cookieSave");
+    const gaDisableKey = "ga-disable-" + NAREZAKFEST_GA_ID;
+
+    function readConsent() {
+      try {
+        return localStorage.getItem(NAREZAKFEST_CONSENT_KEY);
+      } catch {
+        return null;
+      }
+    }
+
+    function writeConsent(value) {
+      try {
+        localStorage.setItem(NAREZAKFEST_CONSENT_KEY, value);
+      } catch {}
+    }
+
+    function removeAnalyticsCookies() {
+      const rootDomain = location.hostname.replace(/^www\./, "");
+
+      document.cookie.split(";").forEach((cookie) => {
+        const name = cookie.split("=")[0].trim();
+        if (!/^(_ga|_gid|_gat)/.test(name)) return;
+
+        document.cookie =
+          name + "=; Max-Age=0; path=/; SameSite=Lax";
+        document.cookie =
+          name + "=; Max-Age=0; path=/; domain=" +
+          location.hostname + "; SameSite=Lax";
+        document.cookie =
+          name + "=; Max-Age=0; path=/; domain=." +
+          rootDomain + "; SameSite=Lax";
+      });
+    }
+
+    function closeBanner() {
+      banner.hidden = true;
+      details.hidden = true;
+      customizeButton.setAttribute("aria-expanded", "false");
+      settingsButton.hidden = false;
+    }
+
+    function openBanner(showDetails = false) {
+      const savedConsent = readConsent();
+
+      analyticsCheckbox.checked = savedConsent === "granted";
+      banner.hidden = false;
+      settingsButton.hidden = true;
+      details.hidden = !showDetails;
+      customizeButton.setAttribute(
+        "aria-expanded",
+        String(showDetails)
+      );
+    }
+
+    function saveConsent(value) {
+      const granted = value === "granted";
+
+      writeConsent(value);
+      window[gaDisableKey] = !granted;
+
+      if (granted) {
+        loadNarezakfestAnalytics();
+
+        gtag("consent", "update", {
+          analytics_storage: "granted",
+          ad_storage: "denied",
+          ad_user_data: "denied",
+          ad_personalization: "denied"
+        });
+      } else {
+        if (document.querySelector("script[data-narezakfest-ga]")) {
+          gtag("consent", "update", {
+            analytics_storage: "denied",
+            ad_storage: "denied",
+            ad_user_data: "denied",
+            ad_personalization: "denied"
+          });
+        }
+
+        removeAnalyticsCookies();
+      }
+
+      closeBanner();
+    }
+
+    acceptButton.addEventListener("click", () => {
+      saveConsent("granted");
+    });
+
+    rejectButton.addEventListener("click", () => {
+      saveConsent("denied");
+    });
+
+    customizeButton.addEventListener("click", () => {
+      const willOpen = details.hidden;
+      details.hidden = !willOpen;
+      customizeButton.setAttribute(
+        "aria-expanded",
+        String(willOpen)
+      );
+    });
+
+    saveButton.addEventListener("click", () => {
+      saveConsent(
+        analyticsCheckbox.checked ? "granted" : "denied"
+      );
+    });
+
+    settingsButton.addEventListener("click", () => {
+      openBanner(true);
+    });
+
+    const savedConsent = readConsent();
+
+    if (
+      savedConsent === "granted" ||
+      savedConsent === "denied"
+    ) {
+      window[gaDisableKey] = savedConsent !== "granted";
+      closeBanner();
+    } else {
+      openBanner(false);
+    }
+  })();
+</script>
 </body>
 </html>
