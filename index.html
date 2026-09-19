@@ -150,20 +150,58 @@
 .cookie-consent__panel{
   width:100%;
   min-height:100dvh;
-  padding:clamp(24px,5vw,72px);
+  padding:clamp(28px,6vw,90px);
   color:var(--text);
-  background:rgba(13,13,13,.98);
+  background:
+    radial-gradient(circle at 20% 30%,rgba(239,233,0,.12),transparent 35%),
+    linear-gradient(135deg,#171717,#050505 70%);
   border:0;
   border-radius:0;
   box-shadow:none;
+  display:grid;
+  grid-template-columns:minmax(260px,.9fr) minmax(0,1.1fr);
+  gap:clamp(28px,5vw,80px);
+  align-items:center;
 }
 
-  .cookie-consent__top{
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-    gap:24px;
-  }
+.cookie-consent__visual{
+  grid-column:1;
+  grid-row:1 / span 2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.cookie-consent__visual img{
+  width:min(100%,420px);
+  height:auto;
+  filter:drop-shadow(0 20px 40px rgba(0,0,0,.65));
+}
+
+.cookie-consent__top,
+.cookie-consent__details{
+  grid-column:2;
+}
+
+.cookie-consent__top{
+  display:block;
+}
+
+.cookie-consent__panel .cookie-consent__copy h2{
+  font-size:clamp(40px,5vw,72px);
+  line-height:1;
+  text-transform:uppercase;
+}
+
+.cookie-consent__panel .cookie-consent__copy p{
+  font-size:clamp(18px,2vw,24px);
+}
+
+.cookie-consent__panel .cookie-consent__actions{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  margin-top:32px;
+}
 
   .cookie-consent__copy{
     flex:1 1 420px;
@@ -283,12 +321,28 @@
 }
 
     .cookie-consent__panel{
-      padding:18px;
-    }
+  padding:24px 18px;
+  grid-template-columns:1fr;
+  gap:18px;
+}
 
-    .cookie-consent__top{
-      display:block;
-    }
+.cookie-consent__visual{
+  grid-column:1;
+  grid-row:auto;
+}
+
+.cookie-consent__visual img{
+  max-width:240px;
+}
+
+.cookie-consent__top,
+.cookie-consent__details{
+  grid-column:1;
+}
+
+.cookie-consent__panel .cookie-consent__actions{
+  grid-template-columns:1fr;
+}
 
     .cookie-consent__actions{
       margin-top:16px;
@@ -1064,15 +1118,19 @@ z-index:1;
   aria-describedby="cookieConsentText"
   hidden
 >
-  <div class="cookie-consent__panel">
-    <div class="cookie-consent__top">
-      <div class="cookie-consent__copy">
-        <h2 id="cookieConsentTitle">Cookies a soukromí</h2>
-        <p id="cookieConsentText">
-          Nezbytné úložiště používáme pro zapamatování vaší volby.
-          Google Analytics spustíme pouze s vaším souhlasem.
-        </p>
-      </div>
+ <div class="cookie-consent__panel">
+  <div class="cookie-consent__visual">
+    <img src="Logo.png" alt="NÁŘEZÁKFEST">
+  </div>
+
+  <div class="cookie-consent__top">
+    <div class="cookie-consent__copy">
+      <h2 id="cookieConsentTitle">NEŽ ZAPAŘÍME...</h2>
+      <p id="cookieConsentText">
+        Prosíme o potvrzení cookies a jdeme na věc!
+        Google Analytics spustíme pouze s vaším souhlasem.
+      </p>
+    </div>
 
       <div class="cookie-consent__actions">
         <button
@@ -1080,7 +1138,7 @@ z-index:1;
           class="cookie-consent__button cookie-consent__accept"
           id="cookieAccept"
         >
-          Přijmout
+          PŘIJMOUT VŠE
         </button>
 
         <button
@@ -1088,7 +1146,7 @@ z-index:1;
           class="cookie-consent__button"
           id="cookieReject"
         >
-          Odmítnout
+          ODMÍTNOUT VŠE
         </button>
 
         <button
@@ -1117,26 +1175,35 @@ z-index:1;
       </div>
 
       <label class="cookie-consent__option" for="cookieAnalytics">
-        <span class="cookie-consent__option-text">
-          <strong>Analytické cookies</strong>
-          <small>
-            Pomáhají nám anonymně měřit návštěvnost pomocí Google Analytics 4.
-          </small>
-        </span>
-        <input
-          class="cookie-consent__toggle"
-          id="cookieAnalytics"
-          type="checkbox"
-        >
+  <span class="cookie-consent__option-text">
+    <strong>Analytické cookies – Google Analytics 4</strong>
+    <small>
+      Poskytovatel: Google Ireland Limited. Slouží k měření návštěvnosti
+      a používání webu; cookies mohou být uloženy až 2 roky.
+      <a href="https://policies.google.com/privacy?hl=cs" target="_blank" rel="noopener noreferrer">
+        Ochrana soukromí Google
+      </a>
+    </small>
+  </span>
+  <input
+    class="cookie-consent__toggle"
+    id="cookieAnalytics"
+    type="checkbox"
+    aria-label="Povolit analytické cookies"
+  >
       </label>
-
+      <p class="cookie-consent__legal">
+  Správce údajů: Marek Štolle, IČO 08373043,
+  e-mail: narezakfestival@seznam.cz.
+  Souhlas můžete kdykoli změnit přes tlačítko „Nastavení cookies“.
+</p>
       <div class="cookie-consent__save-row">
         <button
           type="button"
           class="cookie-consent__button cookie-consent__save"
           id="cookieSave"
         >
-          Uložit volbu
+          PŘIJMOUT VYBRANÉ
         </button>
       </div>
     </div>
