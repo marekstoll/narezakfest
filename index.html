@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8" /><style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NÁŘEZÁKFEST 2027 | Rockový festival Dolní Kralovice</title>
   <meta name="description" content="NÁŘEZÁKFEST 2027 – rockový festival 17. dubna 2027 v Kulturním sále Dolní Kralovice. Line-up kapel, program, vstupenky a kontakty." />
@@ -76,6 +76,48 @@
     ]
   }
   </script>
+ <script>
+  const NAREZAKFEST_GA_ID = "G-01BMKJBFD2";
+  const NAREZAKFEST_CONSENT_KEY = "narezakfest_cookie_consent";
+
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    window.dataLayer.push(arguments);
+  }
+
+  function loadNarezakfestAnalytics() {
+    if (document.querySelector("script[data-narezakfest-ga]")) return;
+
+    gtag("consent", "default", {
+      analytics_storage: "granted",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied"
+    });
+
+    gtag("js", new Date());
+    gtag("config", NAREZAKFEST_GA_ID, {
+      anonymize_ip: true,
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false
+    });
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src =
+      "https://www.googletagmanager.com/gtag/js?id=" +
+      encodeURIComponent(NAREZAKFEST_GA_ID);
+    script.dataset.narezakfestGa = "true";
+    document.head.appendChild(script);
+  }
+
+  if (
+    localStorage.getItem(NAREZAKFEST_CONSENT_KEY) === "granted"
+  ) {
+    loadNarezakfestAnalytics();
+  }
+</script>
   <style>
     :root{
       --bg:#050505;
