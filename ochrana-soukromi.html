@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ochrana soukromí a cookies | NÁŘEZÁKFEST</title>
+  <meta name="description" content="Informace o zpracování osobních údajů a používání cookies na webu NÁŘEZÁKFEST.">
+  <link rel="canonical" href="https://narezakfest.com/ochrana-soukromi.html">
+  <style>
+    :root{
+      color-scheme:dark;
+      --bg:#050505;
+      --panel:#0d0d0d;
+      --text:#f5f5f5;
+      --muted:#b9b9b9;
+      --line:rgba(255,255,255,.14);
+      --accent:#efe900;
+      --max:980px;
+    }
+
+    *{box-sizing:border-box}
+
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 15%,rgba(239,233,0,.10),transparent 34rem),
+        var(--bg);
+      line-height:1.65;
+    }
+
+    a{color:var(--accent)}
+
+    a:focus-visible,
+    button:focus-visible{
+      outline:3px solid #fff;
+      outline-offset:4px;
+    }
+
+    .page{
+      width:min(var(--max),calc(100% - 32px));
+      margin:0 auto;
+      padding:34px 0 72px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+      margin-bottom:34px;
+    }
+
+    .logo{
+      display:block;
+      width:min(230px,52vw);
+      height:auto;
+    }
+
+    .back,
+    .cookie-button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:12px 20px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      color:var(--text);
+      background:#151515;
+      font:inherit;
+      font-weight:800;
+      text-decoration:none;
+      cursor:pointer;
+    }
+
+    .cookie-button{
+      border-color:var(--accent);
+      color:#000;
+      background:var(--accent);
+    }
+
+    main{
+      padding:clamp(24px,5vw,56px);
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:rgba(13,13,13,.96);
+      box-shadow:0 22px 70px rgba(0,0,0,.45);
+    }
+
+    h1,h2{line-height:1.12}
+
+    h1{
+      max-width:850px;
+      margin:0 0 16px;
+      font-size:clamp(34px,6vw,64px);
+      letter-spacing:-.04em;
+    }
+
+    h2{
+      margin:44px 0 12px;
+      font-size:clamp(24px,4vw,34px);
+    }
+
+    h3{
+      margin:28px 0 8px;
+      font-size:20px;
+    }
+
+    p,li{color:var(--muted)}
+
+    strong{color:var(--text)}
+
+    .lead{
+      max-width:780px;
+      margin:0 0 10px;
+      font-size:18px;
+    }
+
+    .updated{
+      margin:0;
+      color:#8f8f8f;
+      font-size:14px;
+    }
+
+    .notice{
+      margin:28px 0;
+      padding:18px 20px;
+      border-left:5px solid var(--accent);
+      background:#151515;
+    }
+
+    .notice p{margin:0}
+
+    ul{padding-left:22px}
+
+    .table-wrap{
+      overflow-x:auto;
+      margin-top:18px;
+      border:1px solid var(--line);
+      border-radius:14px;
+    }
+
+    table{
+      width:100%;
+      min-width:720px;
+      border-collapse:collapse;
+    }
+
+    th,td{
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      text-align:left;
+      vertical-align:top;
+    }
+
+    th{
+      color:#000;
+      background:var(--accent);
+    }
+
+    tr:last-child td{border-bottom:0}
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:28px;
+    }
+
+    footer{
+      padding:28px 0 0;
+      color:#8d8d8d;
+      text-align:center;
+      font-size:14px;
+    }
+
+    @media(max-width:620px){
+      .topbar{align-items:flex-start;flex-direction:column}
+      .back{width:100%}
+      main{border-radius:18px}
+      .actions>*{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <a href="index.html" aria-label="Zpět na web NÁŘEZÁKFEST">
+        <img class="logo" src="images/Logo.png" alt="NÁŘEZÁKFEST">
+      </a>
+      <a class="back" href="index.html">Zpět na hlavní stránku</a>
+    </header>
+
+    <main>
+      <h1>Zásady ochrany soukromí a používání cookies</h1>
+      <p class="lead">Zde najdete přehledně uvedeno, jak web NÁŘEZÁKFEST pracuje s osobními údaji, technickým úložištěm a analytickými cookies.</p>
+      <p class="updated">Platné od 19. 9. 2026</p>
+
+      <h2>1. Kdo je správcem údajů</h2>
+      <p>
+        Správcem osobních údajů je <strong>Marek Štolle, IČO 08373043</strong>.<br>
+        Kontakt pro otázky a uplatnění práv: <a href="mailto:narezakfestival@seznam.cz">narezakfestival@seznam.cz</a>.
+      </p>
+
+      <h2>2. Jaké údaje a proč zpracováváme</h2>
+
+      <h3>Provoz a zabezpečení webu</h3>
+      <p>Poskytovatel hostingu může v technických protokolech zpracovat zejména IP adresu, datum a čas požadavku, navštívenou adresu, typ prohlížeče a zařízení. Účelem je bezpečný a spolehlivý provoz webu, prevence zneužití a řešení technických chyb. Právním základem je oprávněný zájem správce na zabezpečení a řádném provozu webu. Údaje jsou uchovávány jen po dobu nezbytnou k těmto účelům podle nastavení poskytovatele hostingu.</p>
+
+      <h3>Komunikace</h3>
+      <p>Pokud nás kontaktujete e-mailem nebo telefonicky, zpracujeme údaje, které nám sami sdělíte, zejména jméno, kontaktní údaje a obsah zprávy. Účelem je odpověď na dotaz, domluva spolupráce nebo vyřízení požadavku. Právním základem je jednání před uzavřením smlouvy, plnění smlouvy nebo oprávněný zájem na vyřízení komunikace. Údaje uchováváme po dobu řešení požadavku a následně pouze po dobu potřebnou k ochraně právních nároků nebo splnění zákonné povinnosti.</p>
+
+      <h3>Měření návštěvnosti</h3>
+      <p>Po vašem souhlasu používáme Google Analytics 4. Služba může zpracovat online identifikátory, údaje o zařízení a prohlížeči, navštívené stránky, přibližnou polohu odvozenou z IP adresy a informace o používání webu. Do Google Analytics záměrně neposíláme jméno, e-mail ani telefon. Účelem je souhrnné měření návštěvnosti a zlepšování webu. Právním základem je váš souhlas podle čl. 6 odst. 1 písm. a) GDPR. Uživatelská a událostní data jsou v běžné službě GA4 uchovávána podle nastavení správce nejdéle 14 měsíců; souhrnné statistické přehledy mohou zůstat dostupné déle.</p>
+
+      <div class="notice">
+        <p><strong>Google Analytics se nespustí, dokud analytické cookies výslovně nepovolíte.</strong> Odmítnutí nemá vliv na přístup k webu.</p>
+      </div>
+
+      <h2>3. Cookies a místní úložiště</h2>
+      <p>Technické úložiště potřebné k zapamatování vaší volby používáme bez souhlasu. Analytické cookies ukládáme až po souhlasu; souhlas můžete kdykoli změnit nebo odvolat.</p>
+
+      <div class="table-wrap" role="region" aria-label="Přehled používaného úložiště" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th>Název</th>
+              <th>Poskytovatel</th>
+              <th>Účel</th>
+              <th>Doba</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>narezakfest_cookie_consent</code></td>
+              <td>NÁŘEZÁKFEST</td>
+              <td>Technické místní úložiště pro zapamatování vaší volby.</td>
+              <td>Do změny volby nebo vymazání úložiště prohlížeče.</td>
+            </tr>
+            <tr>
+              <td><code>_ga</code></td>
+              <td>Google Analytics</td>
+              <td>Rozlišení návštěvníků pro statistiku.</td>
+              <td>Standardně až 2 roky.</td>
+            </tr>
+            <tr>
+              <td><code>_ga_&lt;ID&gt;</code></td>
+              <td>Google Analytics</td>
+              <td>Uchování stavu relace pro statistiku.</td>
+              <td>Standardně až 2 roky.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Volbu lze změnit tlačítkem <strong>Nastavení cookies</strong> na hlavní stránce. Následující tlačítko smaže uloženou volbu a otevře hlavní stránku, kde ji nastavíte znovu:</p>
+      <div class="actions">
+        <button class="cookie-button" id="resetCookieConsent" type="button">Změnit nastavení cookies</button>
+      </div>
+
+      <h2>4. Příjemci a předání mimo EHP</h2>
+      <p>V nezbytném rozsahu mohou údaje zpracovat poskytovatel hostingu a technických služeb. U analytiky je příjemcem <strong>Google Ireland Limited</strong>. Společnost Google může data zpracovávat také mimo Evropský hospodářský prostor. Google uvádí, že pro taková předání používá zejména rozhodnutí o odpovídající ochraně, rámec EU–USA Data Privacy Framework a standardní smluvní doložky.</p>
+      <p>
+        Další informace:
+        <a href="https://policies.google.com/privacy?hl=cs" target="_blank" rel="noopener noreferrer">zásady ochrany soukromí Google</a>
+        a
+        <a href="https://policies.google.com/privacy/frameworks?hl=cs" target="_blank" rel="noopener noreferrer">právní rámce pro přenosy dat</a>.
+      </p>
+
+      <h2>5. Vložené video a externí odkazy</h2>
+      <p>Web může obsahovat video vložené z domény <code>youtube-nocookie.com</code> v režimu rozšířené ochrany soukromí a odkazy na YouTube, Instagram, Facebook a další weby. Načtení vloženého přehrávače může příslušnému provozovateli předat technické údaje, například IP adresu, a po spuštění videa může dojít k dalšímu zpracování podle jeho pravidel. Po přechodu na externí web zpracovává údaje jeho provozovatel; NÁŘEZÁKFEST toto zpracování neovlivňuje.</p>
+
+      <h2>6. Jaká máte práva</h2>
+      <p>Podle okolností máte právo požadovat přístup k osobním údajům, jejich opravu nebo výmaz, omezení zpracování, přenositelnost údajů a vznést námitku proti zpracování založenému na oprávněném zájmu. Souhlas můžete kdykoli odvolat; odvolání nemá vliv na zákonnost předchozího zpracování.</p>
+      <p>Žádost pošlete na <a href="mailto:narezakfestival@seznam.cz">narezakfestival@seznam.cz</a>. Máte také právo podat stížnost u <a href="https://uoou.gov.cz/" target="_blank" rel="noopener noreferrer">Úřadu pro ochranu osobních údajů</a>.</p>
+
+      <h2>7. Povinnost poskytnout údaje a automatizované rozhodování</h2>
+      <p>Poskytnutí údajů při kontaktování je dobrovolné; bez kontaktních údajů však nemusíme být schopni odpovědět. Při provozu tohoto webu neprovádíme automatizované individuální rozhodování ani profilování s právními nebo obdobně významnými účinky.</p>
+
+      <h2>8. Změny těchto zásad</h2>
+      <p>Zásady můžeme upravit při změně webu, používaných služeb nebo právních požadavků. Aktuální verze a datum účinnosti budou vždy uvedeny na této stránce.</p>
+    </main>
+
+    <footer>NÁŘEZÁKFEST © 2026</footer>
+  </div>
+
+  <script>
+    document.getElementById('resetCookieConsent').addEventListener('click', () => {
+      try {
+        localStorage.removeItem('narezakfest_cookie_consent');
+      } catch (error) {
+        // Přesměrování funguje i v prohlížeči s blokovaným místním úložištěm.
+      }
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
