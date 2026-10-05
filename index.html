@@ -1103,15 +1103,6 @@ z-index:1;
 </a>
     </div>
   </footer>
-<button
-  type="button"
-  class="cookie-settings-button"
-  id="cookieSettingsButton"
-  aria-label="Otevřít nastavení cookies"
-  hidden
->
-  Nastavení cookies
-</button>
 
 <section
   class="cookie-consent"
@@ -1219,7 +1210,6 @@ z-index:1;
 <script>
   (() => {
     const banner = document.getElementById("cookieConsent");
-    const settingsButton = document.getElementById("cookieSettingsButton");
     const acceptButton = document.getElementById("cookieAccept");
     const rejectButton = document.getElementById("cookieReject");
     const customizeButton = document.getElementById("cookieCustomize");
@@ -1264,7 +1254,6 @@ z-index:1;
       banner.hidden = true;
       details.hidden = true;
       customizeButton.setAttribute("aria-expanded", "false");
-      settingsButton.hidden = false;
     }
 
     function openBanner(showDetails = false) {
@@ -1272,7 +1261,6 @@ z-index:1;
 
       analyticsCheckbox.checked = savedConsent === "granted";
       banner.hidden = false;
-      settingsButton.hidden = true;
       details.hidden = !showDetails;
       customizeButton.setAttribute(
         "aria-expanded",
@@ -1332,10 +1320,6 @@ z-index:1;
       saveConsent(
         analyticsCheckbox.checked ? "granted" : "denied"
       );
-    });
-
-    settingsButton.addEventListener("click", () => {
-      openBanner(true);
     });
 
     const savedConsent = readConsent();
