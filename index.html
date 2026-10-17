@@ -486,9 +486,9 @@ h2{margin-inline-start:-.035em}
 .band-disc:before{content:"";position:absolute;inset:7px;border:1px solid #2d2d28;border-radius:50%;pointer-events:none}
 .band-disc img{width:100%;height:100%;object-fit:contain;padding:17px;border-radius:50%}
 .band-copy{min-width:0;max-width:490px}
-.band-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:17px;gap:20px}
+.band-meta{min-height:33px;display:flex;align-items:center;justify-content:space-between;margin-bottom:17px;gap:20px}
 .band-meta time{font-size:17px;font-weight:700;letter-spacing:.07em;color:var(--band-color);font-variant-numeric:tabular-nums}
-.band-link-icon{font-size:22px;color:#8c8c83;transition:color .2s,transform .2s}
+
 .band-strip{height:64px;background:var(--band-color);color:#090909;position:relative;overflow:hidden;font-size:clamp(27px,3vw,38px);font-weight:900;letter-spacing:-.04em;line-height:64px;max-width:490px;--entry:490px;--travel-time:24s;--start-delay:-10s;--second-delay:-22s}
 .band-marquee{position:relative;display:block;width:100%;height:100%}
 .band-name{position:absolute;top:0;left:0;display:block;width:max-content;white-space:nowrap;animation:twin-name var(--travel-time) linear infinite;animation-play-state:paused;animation-delay:var(--start-delay)}
@@ -497,7 +497,7 @@ h2{margin-inline-start:-.035em}
 .lineup-list:not(.is-enhanced) .band-name[aria-hidden]{display:none}
 .lineup-list.in-view .band-disc,.lineup-list.in-view .band-name{animation-play-state:running}
 .band-row:hover .band-disc{border-color:var(--band-color)}
-.band-row:hover .band-link-icon{color:var(--band-color);transform:translate(2px,-2px)}
+.band-row:hover 
 @keyframes woofer-beat{0%,24%,52%,100%{transform:scale(1)}10%{transform:scale(1.075)}36%{transform:scale(1.045)}}
 @keyframes twin-name{from{transform:translateX(var(--entry))}to{transform:translateX(-100%)}}
 .gallery-shell{max-width:1120px;margin-inline:auto;padding:32px 24px 21px;border:1px solid #30302a;border-radius:20px;background:#10100f}
@@ -525,11 +525,11 @@ h2{margin-inline-start:-.035em}
 .gallery-stage{gap:14px}
 .gallery-bottom{padding-inline:56px}}
 @media(max-width:900px){.gallery-slide{flex-basis:calc((100% - 32px)/3)}}
-@media(max-width:760px){.band-disc{width:112px;height:112px}
+@media(max-width:760px){.band-meta{min-height:27px}.band-disc{width:112px;height:112px}
 .band-disc img{padding:10px}
 .band-meta{margin-bottom:13px}
 .band-meta time{font-size:15px}
-.band-link-icon{font-size:18px}
+
 .band-strip{height:53px;font-size:27px;line-height:53px}
 .band-copy{max-width:none}
 .gallery-shell{padding:23px 14px 16px;border-radius:16px}
@@ -697,10 +697,10 @@ body.consent-open{overflow:hidden}
 
       <div class="hero-card">
         <div class="hero-grid">
-<div class="mini">
+<a class="mini" href="https://www.firmy.cz/detail/12975784-kulturni-dum-dolni-kralovice-dolni-kralovice.html" target="_blank" rel="noopener noreferrer" aria-label="Kulturní sál Dolní Kralovice – podrobnosti a mapa na Firmy.cz">
   <div class="k">Místo</div>
   <div class="v">Kulturní sál Dolní Kralovice</div>
-</div>
+</a>
 <div class="mini">
   <div class="k">Datum</div>
   <div class="v">17. 4. 2027</div>
@@ -745,23 +745,23 @@ body.consent-open{overflow:hidden}
     <div class="section-head"><div><div class="section-k">Program</div><h2>Line-up kapel</h2></div></div>
     <div class="lineup-list"><a class="band-row" href="https://www.instagram.com/kapela_stinovlas/" target="_blank" rel="noopener noreferrer" aria-label="STÍNOVLAS, 20:30, Instagram">
       <div class="band-disc"><img src="images/nf-02-7d40dfb9.webp" width="384" height="184" alt="Logo kapely STÍNOVLAS" loading="lazy" decoding="async"></div>
-      <div class="band-copy"><div class="band-meta"><time datetime="2027-04-17T20:30:00+02:00">20:30</time><span class="band-link-icon" aria-hidden="true">↗</span></div>
+      <div class="band-copy"><div class="band-meta"><time datetime="2027-04-17T20:30:00+02:00">20:30</time></div>
       <h3 class="band-strip"><span class="band-marquee"><span class="band-name">STÍNOVLAS</span><span class="band-name" aria-hidden="true">STÍNOVLAS</span></span></h3></div>
     </a><a class="band-row" href="https://www.instagram.com/anfall_band/" target="_blank" rel="noopener noreferrer" aria-label="ANFALL, 21:45, Instagram">
       <div class="band-disc"><img src="images/nf-03-668a7440.webp" width="384" height="299" alt="Logo kapely ANFALL" loading="lazy" decoding="async"></div>
-      <div class="band-copy"><div class="band-meta"><time datetime="2027-04-17T21:45:00+02:00">21:45</time><span class="band-link-icon" aria-hidden="true">↗</span></div>
+      <div class="band-copy"><div class="band-meta"><time datetime="2027-04-17T21:45:00+02:00">21:45</time></div>
       <h3 class="band-strip"><span class="band-marquee"><span class="band-name">ANFALL</span><span class="band-name" aria-hidden="true">ANFALL</span></span></h3></div>
     </a><a class="band-row" href="https://www.instagram.com/bld_ofiko/" target="_blank" rel="noopener noreferrer" aria-label="BLD, 23:00, Instagram">
       <div class="band-disc"><img src="images/nf-04-b8e28746.webp" width="384" height="234" alt="Logo kapely BLD" loading="lazy" decoding="async"></div>
-      <div class="band-copy"><div class="band-meta"><time datetime="2027-04-17T23:00:00+02:00">23:00</time><span class="band-link-icon" aria-hidden="true">↗</span></div>
+      <div class="band-copy"><div class="band-meta"><time datetime="2027-04-17T23:00:00+02:00">23:00</time></div>
       <h3 class="band-strip"><span class="band-marquee"><span class="band-name">BLD</span><span class="band-name" aria-hidden="true">BLD</span></span></h3></div>
     </a><a class="band-row" href="https://www.instagram.com/re_flex_official/" target="_blank" rel="noopener noreferrer" aria-label="RE-FLEX, 00:15, Instagram">
       <div class="band-disc"><img src="images/nf-05-c564673a.webp" width="384" height="127" alt="Logo kapely RE-FLEX" loading="lazy" decoding="async"></div>
-      <div class="band-copy"><div class="band-meta"><time datetime="2027-04-18T00:15:00+02:00">00:15</time><span class="band-link-icon" aria-hidden="true">↗</span></div>
+      <div class="band-copy"><div class="band-meta"><time datetime="2027-04-18T00:15:00+02:00">00:15</time></div>
       <h3 class="band-strip"><span class="band-marquee"><span class="band-name">RE-FLEX</span><span class="band-name" aria-hidden="true">RE-FLEX</span></span></h3></div>
     </a><a class="band-row" href="https://www.instagram.com/ztracenyklice_/" target="_blank" rel="noopener noreferrer" aria-label="ZTRACENÝ KLÍČE, 01:30, Instagram">
       <div class="band-disc"><img src="images/nf-06-6fbca78e.webp" width="384" height="187" alt="Logo kapely ZTRACENÝ KLÍČE" loading="lazy" decoding="async"></div>
-      <div class="band-copy"><div class="band-meta"><time datetime="2027-04-18T01:30:00+02:00">01:30</time><span class="band-link-icon" aria-hidden="true">↗</span></div>
+      <div class="band-copy"><div class="band-meta"><time datetime="2027-04-18T01:30:00+02:00">01:30</time></div>
       <h3 class="band-strip"><span class="band-marquee"><span class="band-name">ZTRACENÝ KLÍČE</span><span class="band-name" aria-hidden="true">ZTRACENÝ KLÍČE</span></span></h3></div>
     </a></div></div></section>
 
