@@ -70,6 +70,7 @@
           {"@type": "MusicGroup", "name": "STÍNOVLAS", "url": "https://kapelastinovlas.cz/", "sameAs": ["https://www.instagram.com/kapela_stinovlas/", "https://www.youtube.com/@Kapela_Stinovlas"]},
 {"@type": "MusicGroup", "name": "ANFALL", "sameAs": "https://www.instagram.com/anfall_band/"},
 {"@type": "MusicGroup", "name": "BLD", "sameAs": "https://www.instagram.com/bld_ofiko/"},
+{"@type": "MusicGroup", "name": "RE-FLEX", "sameAs": "https://www.instagram.com/re_flex_official/"},
 {"@type": "MusicGroup", "name": "ZTRACENÝ KLÍČE", "sameAs": "https://www.instagram.com/ztracenyklice_/"}
         ]
       }
@@ -572,80 +573,109 @@ z-index:1;
     .cards{
       display:grid; gap:16px;
     }
+    /* Five equally sized cards: 3 + 2, 2 + 2 + 1, then one column. */
     .lineup{
-      grid-template-columns:repeat(2, minmax(0,1fr));
+      grid-template-columns:repeat(6, minmax(0,1fr));
+      grid-auto-rows:1fr;
+      gap:16px;
     }
-    .card{
+    .lineup > .card{
+      grid-column:span 2;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 106px;
+      align-items:center;
+      gap:16px;
+      min-width:0;
+      min-height:194px;
+      padding:22px;
       border:1px solid var(--line);
       background:var(--card);
       border-radius:var(--radius);
-      padding:22px;
-      transition:.22s ease;
       box-shadow:var(--shadow);
+      transition:transform .22s ease, background .22s ease, border-color .22s ease;
     }
-    .card:hover{
+    .lineup > .card:nth-child(4){grid-column:2 / span 2}
+    .lineup > .card:nth-child(5){grid-column:4 / span 2}
+    .lineup > .card:hover{
       transform:translateY(-4px);
       background:rgba(255,255,255,.06);
+      border-color:rgba(239,233,0,.35);
     }
-    .time{
+    .lineup > .card:focus-visible{
+      outline:2px solid var(--accent);
+      outline-offset:4px;
+    }
+    .lineup .card-copy{min-width:0; align-self:start}
+    .lineup .time{
       color:var(--accent);
       font-size:13px;
       letter-spacing:.22em;
       text-transform:uppercase;
-      margin-bottom:10px;
+      margin-bottom:12px;
       font-weight:700;
     }
-    .band{
-      font-size:32px; font-weight:900;
+    .lineup .band{
+      font-size:24px;
+      font-weight:900;
+      line-height:1.15;
       margin:0 0 8px;
+      min-height:2.3em;
+      overflow-wrap:anywhere;
     }
-    .sub{color:var(--muted); line-height:1.6}
-.card{
-  position:relative;
-  padding-right:190px;
-}
-
-.card-copy{
-  position:relative;
-  z-index:2;
-}
-
-.band-logo-wrap{
-  position:absolute;
-  right:22px;
-  top:50%;
-  transform:translateY(-50%);
-  width:145px;
-  height:78px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.band-logo{
-  max-width:100%;
-  max-height:100%;
-  width:auto;
-  height:auto;
-  object-fit:contain;
-}
+    .lineup .sub{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.6;
+      min-height:3.2em;
+    }
+    .lineup .band-logo-wrap{
+      width:100%;
+      height:84px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .lineup .band-logo{
+      max-width:100%;
+      max-height:100%;
+      width:auto;
+      height:auto;
+      object-fit:contain;
+    }
     .stinovlas-logo-wrap .band-logo{
-  filter:
-    drop-shadow(1px 0 0 #000)
-    drop-shadow(-1px 0 0 #000)
-    drop-shadow(0 1px 0 #000)
-    drop-shadow(0 -1px 0 #000);
-}
-
-.klice-logo-wrap{
-  background:radial-gradient(
-    ellipse at center,
-    rgba(110,110,110,.25) 0%,
-    rgba(70,70,70,.14) 45%,
-    rgba(0,0,0,0) 75%
-  );
-  border-radius:50%;
-}
+      filter:
+        drop-shadow(1px 0 0 #000)
+        drop-shadow(-1px 0 0 #000)
+        drop-shadow(0 1px 0 #000)
+        drop-shadow(0 -1px 0 #000);
+    }
+    .klice-logo-wrap{
+      background:radial-gradient(
+        ellipse at center,
+        rgba(110,110,110,.25) 0%,
+        rgba(70,70,70,.14) 45%,
+        rgba(0,0,0,0) 75%
+      );
+      border-radius:50%;
+    }
+    @media (max-width:1100px){
+      .lineup{grid-template-columns:repeat(4, minmax(0,1fr))}
+      .lineup > .card:nth-child(4){grid-column:auto / span 2}
+      .lineup > .card:nth-child(5){grid-column:2 / span 2}
+    }
+    @media (max-width:700px){
+      .lineup{grid-template-columns:minmax(0,1fr)}
+      .lineup > .card,
+      .lineup > .card:nth-child(4),
+      .lineup > .card:nth-child(5){
+        grid-column:auto;
+        grid-template-columns:minmax(0,1fr) clamp(78px,22vw,106px);
+        gap:12px;
+        min-height:166px;
+        padding:20px 18px;
+      }
+      .lineup .band{font-size:23px}
+    }
     .gallery{
   display:grid;
   grid-template-columns:repeat(3, minmax(0,1fr));
@@ -795,7 +825,6 @@ z-index:1;
       .info-layout{
         grid-template-columns:1fr;
       }
-      .lineup,
       .gallery,
       .partners{
         grid-template-columns:1fr 1fr;
@@ -816,7 +845,6 @@ z-index:1;
       .hero{min-height:auto}
       .hero-in{padding-top:56px}
       .hero-grid{grid-template-columns:1fr}
-      .lineup,
       .gallery,
       .partners{
         grid-template-columns:1fr;
@@ -932,7 +960,7 @@ z-index:1;
 
       <div class="cards lineup">
 
-  <a class="card fade" href="https://www.instagram.com/kapela_stinovlas/" target="_blank" rel="noopener noreferrer" aria-label="STÍNOVLAS na Instagramu">
+  <a class="card" href="https://www.instagram.com/kapela_stinovlas/" target="_blank" rel="noopener noreferrer" aria-label="STÍNOVLAS na Instagramu">
   <div class="card-copy">
     <div class="time">20:30</div>
     <h3 class="band">STÍNOVLAS</h3>
@@ -943,7 +971,7 @@ z-index:1;
   </div>
 </a>
 
-<a class="card fade d2" href="https://www.instagram.com/anfall_band/" target="_blank" rel="noopener noreferrer" aria-label="ANFALL na Instagramu">
+<a class="card" href="https://www.instagram.com/anfall_band/" target="_blank" rel="noopener noreferrer" aria-label="ANFALL na Instagramu">
   <div class="card-copy">
     <div class="time">21:45</div>
     <h3 class="band">ANFALL</h3>
@@ -954,7 +982,7 @@ z-index:1;
   </div>
 </a>
 
-<a class="card fade d3" href="https://www.instagram.com/bld_ofiko/" target="_blank" rel="noopener noreferrer" aria-label="BLD na Instagramu">
+<a class="card" href="https://www.instagram.com/bld_ofiko/" target="_blank" rel="noopener noreferrer" aria-label="BLD na Instagramu">
   <div class="card-copy">
     <div class="time">23:00</div>
     <h3 class="band">BLD</h3>
@@ -965,9 +993,21 @@ z-index:1;
   </div>
 </a>
 
-<a class="card fade d4" href="https://www.instagram.com/ztracenyklice_/" target="_blank" rel="noopener noreferrer" aria-label="ZTRACENÝ KLÍČE na Instagramu">
+<a class="card" href="https://www.instagram.com/re_flex_official/" target="_blank" rel="noopener noreferrer" aria-label="RE-FLEX na Instagramu">
   <div class="card-copy">
     <div class="time">00:15</div>
+    <h3 class="band">RE-FLEX</h3>
+    <!-- Popis kapely doplnit po dodání schváleného textu. -->
+    <div class="sub" aria-hidden="true"></div>
+  </div>
+  <div class="band-logo-wrap">
+    <img class="band-logo" src="images/Logo od Martina.png" alt="Logo kapely RE-FLEX" loading="lazy" decoding="async">
+  </div>
+</a>
+
+<a class="card" href="https://www.instagram.com/ztracenyklice_/" target="_blank" rel="noopener noreferrer" aria-label="ZTRACENÝ KLÍČE na Instagramu">
+  <div class="card-copy">
+    <div class="time">01:30</div>
     <h3 class="band">ZTRACENÝ KLÍČE</h3>
     <div class="sub">Taneční kapela z Vysočiny</div>
   </div>
