@@ -67,33 +67,7 @@
           "https://www.youtube.com/@N%C3%81%C5%98EZ%C3%81KFEST"
         ],
         "@id": "https://narezakfest.com/#organizer"
-      },
-      "performer": [
-        {
-          "@type": "MusicGroup",
-          "name": "STÍNOVLAS",
-          "url": "https://kapelastinovlas.cz/",
-          "sameAs": [
-            "https://www.instagram.com/kapela_stinovlas/",
-            "https://www.youtube.com/@Kapela_Stinovlas"
-          ]
-        },
-        {
-          "@type": "MusicGroup",
-          "name": "ANFALL",
-          "sameAs": "https://www.instagram.com/anfall_band/"
-        },
-        {
-          "@type": "MusicGroup",
-          "name": "RE-FLEX",
-          "sameAs": "https://www.instagram.com/re_flex_official/"
-        },
-        {
-          "@type": "MusicGroup",
-          "name": "ZTRACENÝ KLÍČE",
-          "sameAs": "https://www.instagram.com/ztracenyklice_/"
-        }
-      ]
+      }
     }
   ]
 }
@@ -646,8 +620,18 @@ body.consent-open{overflow:hidden}
 .youtube-launch span{position:relative;z-index:1;background:#080808d9;border:1px solid #ffffff60;border-radius:8px;padding:14px 18px;color:#fff;font-weight:bold;font-size:14px;line-height:1.5}
 .youtube-launch small{display:block;font-size:11px;font-weight:normal;color:#ddd}
 .youtube-launch:hover span{border-color:var(--accent)}
+
+/* Unannounced line-up: times and coloured strips only, on every screen. */
+#lineup .band-row{grid-template-columns:minmax(0,1fr);gap:0}
+
+/* Cookie choices remain equally prominent and the dialog can be dismissed. */
+.cookie-consent__panel{position:relative}
+#cookieReject{color:#050505;background:var(--accent);border-color:var(--accent)}
+.cookie-consent__close{position:absolute;top:12px;right:12px;width:44px;height:44px;display:grid;place-items:center;padding:0;border:1px solid rgba(255,255,255,.35);border-radius:50%;background:#171717;color:var(--text);font:inherit;font-size:28px;line-height:1;cursor:pointer}
+.cookie-consent__close:hover{border-color:var(--accent)}
+.cookie-consent__close:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 </style>
-<meta property="og:image:width" content="1200"><meta property="og:image:height" content="800"><meta property="og:image:type" content="image/jpeg"><meta name="twitter:image:alt" content="Atmosféra hudebního festivalu NÁŘEZÁKFEST"><script src="assets/consent.js" defer></script><script src="assets/youtube.js" defer></script></head>
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="800"><meta property="og:image:type" content="image/jpeg"><meta name="twitter:image:alt" content="Atmosféra hudebního festivalu NÁŘEZÁKFEST"><script src="assets/consent.js?v=20261113" defer></script><script src="assets/youtube.js" defer></script></head>
 <body>
 <a class="skip-link" href="#info">Přejít na obsah</a>
 
@@ -737,23 +721,32 @@ body.consent-open{overflow:hidden}
 
   <section id="lineup"><div class="wrap">
     <div class="section-head"><div><div class="section-k">Program</div><h2>Line-up kapel</h2></div></div>
-    <div class="lineup-list"><a class="band-row" href="https://www.instagram.com/kapela_stinovlas/" target="_blank" rel="noopener noreferrer" aria-label="STÍNOVLAS, 20:30, Instagram">
-      <div class="band-disc"><img src="images/nf-02-7d40dfb9.webp" width="384" height="184" alt="Logo kapely STÍNOVLAS" loading="lazy" decoding="async"></div>
-      <div class="band-copy"><div class="band-meta"><time datetime="2027-04-17T20:30:00+02:00">20:30</time><span class="band-link-icon" aria-hidden="true" style="visibility:hidden">↗</span></div>
-      <h3 class="band-strip"><span class="band-marquee"><span class="band-name">STÍNOVLAS</span><span class="band-name" aria-hidden="true">STÍNOVLAS</span></span></h3></div>
-    </a><a class="band-row" href="https://www.instagram.com/anfall_band/" target="_blank" rel="noopener noreferrer" aria-label="ANFALL, 21:45, Instagram">
-      <div class="band-disc"><img src="images/nf-03-668a7440.webp" width="384" height="299" alt="Logo kapely ANFALL" loading="lazy" decoding="async"></div>
-      <div class="band-copy"><div class="band-meta"><time datetime="2027-04-17T21:45:00+02:00">21:45</time><span class="band-link-icon" aria-hidden="true" style="visibility:hidden">↗</span></div>
-      <h3 class="band-strip"><span class="band-marquee"><span class="band-name">ANFALL</span><span class="band-name" aria-hidden="true">ANFALL</span></span></h3></div>
-    </a><a class="band-row" href="https://www.instagram.com/re_flex_official/" target="_blank" rel="noopener noreferrer" aria-label="RE-FLEX, 23:00, Instagram">
-      <div class="band-disc"><img src="images/nf-05-c564673a.webp" width="384" height="127" alt="Logo kapely RE-FLEX" loading="lazy" decoding="async"></div>
-      <div class="band-copy"><div class="band-meta"><time datetime="2027-04-17T23:00:00+02:00">23:00</time><span class="band-link-icon" aria-hidden="true" style="visibility:hidden">↗</span></div>
-      <h3 class="band-strip"><span class="band-marquee"><span class="band-name">RE-FLEX</span><span class="band-name" aria-hidden="true">RE-FLEX</span></span></h3></div>
-    </a><a class="band-row" href="https://www.instagram.com/ztracenyklice_/" target="_blank" rel="noopener noreferrer" aria-label="ZTRACENÝ KLÍČE, 00:15, Instagram">
-      <div class="band-disc"><img src="images/nf-06-6fbca78e.webp" width="384" height="187" alt="Logo kapely ZTRACENÝ KLÍČE" loading="lazy" decoding="async"></div>
-      <div class="band-copy"><div class="band-meta"><time datetime="2027-04-18T00:15:00+02:00">00:15</time><span class="band-link-icon" aria-hidden="true" style="visibility:hidden">↗</span></div>
-      <h3 class="band-strip"><span class="band-marquee"><span class="band-name">ZTRACENÝ KLÍČE</span><span class="band-name" aria-hidden="true">ZTRACENÝ KLÍČE</span></span></h3></div>
-    </a></div></div></section>
+    <div class="lineup-list">
+      <article class="band-row">
+        <div class="band-copy">
+          <div class="band-meta"><time datetime="2027-04-17T20:30:00+02:00">20:30</time></div>
+          <h3 class="band-strip"><span class="band-marquee"><span class="band-name">Bude Oznámeno</span><span class="band-name" aria-hidden="true">Bude Oznámeno</span></span></h3>
+        </div>
+      </article>
+      <article class="band-row">
+        <div class="band-copy">
+          <div class="band-meta"><time datetime="2027-04-17T21:45:00+02:00">21:45</time></div>
+          <h3 class="band-strip"><span class="band-marquee"><span class="band-name">Bude Oznámeno</span><span class="band-name" aria-hidden="true">Bude Oznámeno</span></span></h3>
+        </div>
+      </article>
+      <article class="band-row">
+        <div class="band-copy">
+          <div class="band-meta"><time datetime="2027-04-17T23:00:00+02:00">23:00</time></div>
+          <h3 class="band-strip"><span class="band-marquee"><span class="band-name">Bude Oznámeno</span><span class="band-name" aria-hidden="true">Bude Oznámeno</span></span></h3>
+        </div>
+      </article>
+      <article class="band-row">
+        <div class="band-copy">
+          <div class="band-meta"><time datetime="2027-04-18T00:15:00+02:00">00:15</time></div>
+          <h3 class="band-strip"><span class="band-marquee"><span class="band-name">Bude Oznámeno</span><span class="band-name" aria-hidden="true">Bude Oznámeno</span></span></h3>
+        </div>
+      </article>
+    </div></div></section>
 
   <section id="galerie"><div class="wrap"><div class="section-head"><div><div class="section-k">Atmosféra</div><h2>Galerie</h2></div></div>
 <div class="gallery-shell"><div class="gallery-stage">
@@ -870,13 +863,14 @@ body.consent-open{overflow:hidden}
     <div class="wrap">
       NÁŘEZÁKFEST © 2026 ·
 <a href="ochrana-soukromi.html" style="color:#efe900;">
-  Ochrana soukromí a cookies
+  Údaje pořadatele, soukromí a cookies
 </a>
     <button type="button" class="cookie-footer-button" data-cookie-settings="">Nastavení cookies</button></div>
   </footer>
 
 <section class="cookie-consent" id="cookieConsent" role="dialog" aria-labelledby="cookieConsentTitle" aria-describedby="cookieConsentText" hidden aria-modal="true">
  <div class="cookie-consent__panel">
+  <button type="button" class="cookie-consent__close" id="cookieClose" aria-label="Zavřít nastavení cookies bez změny souhlasu">×</button>
   <div class="cookie-consent__visual">
     <img src="images/nf-21-b24b3ad0.webp" alt="NÁŘEZÁKFEST" width="840" height="384">
   </div>
@@ -885,7 +879,7 @@ body.consent-open{overflow:hidden}
     <div class="cookie-consent__copy">
       <h2 id="cookieConsentTitle">NEŽ ZAPAŘÍME...</h2>
       <p id="cookieConsentText">
-        Prosíme o potvrzení cookies a jdeme na věc!
+        Analytické cookies nám pomáhají měřit návštěvnost. Použijeme je jen s vaším souhlasem. Web můžete používat i bez nich.
         </p>
      <p style="margin:12px 0 0;">
   <a href="ochrana-soukromi.html" style="color:#efe900;font-weight:800;">
