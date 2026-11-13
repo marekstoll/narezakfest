@@ -1,0 +1,249 @@
+# Upload this file into .github/workflows/ on the main branch.
+# Uploading runs a read-only preflight; it does not announce the bands early.
+# First scheduled attempt: 20 November 2026 at 00:07 Europe/Prague.
+# Further attempts: hourly during 20 November; stop after confirmed publication.
+name: Restore lineup on 20 November 2026
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/restore-lineup-20261120.yml']
+  workflow_dispatch:
+  schedule:
+    - cron: '7 23 19 11 *'
+    - cron: '7 0-22 20 11 *'
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: restore-lineup-20261120
+  cancel-in-progress: false
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPOSITORY: ${{ github.repository }}
+      GH_EVENT_NAME: ${{ github.event_name }}
+    steps:
+      - name: Validate, restore the lineup when due, and publish GitHub Pages
+        shell: bash
+        run: |
+          python3 - <<'PYTHON'
+          import base64
+          import hashlib
+          import json
+          import os
+          import re
+          import time
+          import urllib.error
+          import urllib.request
+          from datetime import datetime
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+          
+          RESTORED_SECTION = '<section id="lineup"><div class="wrap">\n    <div class="section-head"><div><div class="section-k">Program</div><h2>Line-up kapel</h2></div></div>\n    <div class="lineup-list"><a class="band-row" href="https://www.instagram.com/kapela_stinovlas/" target="_blank" rel="noopener noreferrer" aria-label="STÍNOVLAS, 20:30, Instagram">\n      <div class="band-disc"><img src="images/nf-02-7d40dfb9.webp" width="384" height="184" alt="Logo kapely STÍNOVLAS" loading="lazy" decoding="async"></div>\n      <div class="band-copy"><div class="band-meta"><time datetime="2027-04-17T20:30:00+02:00">20:30</time><span class="band-link-icon" aria-hidden="true" style="visibility:hidden">↗</span></div>\n      <h3 class="band-strip"><span class="band-marquee"><span class="band-name">STÍNOVLAS</span><span class="band-name" aria-hidden="true">STÍNOVLAS</span></span></h3></div>\n    </a><a class="band-row" href="https://www.instagram.com/anfall_band/" target="_blank" rel="noopener noreferrer" aria-label="ANFALL, 21:45, Instagram">\n      <div class="band-disc"><img src="images/nf-03-668a7440.webp" width="384" height="299" alt="Logo kapely ANFALL" loading="lazy" decoding="async"></div>\n      <div class="band-copy"><div class="band-meta"><time datetime="2027-04-17T21:45:00+02:00">21:45</time><span class="band-link-icon" aria-hidden="true" style="visibility:hidden">↗</span></div>\n      <h3 class="band-strip"><span class="band-marquee"><span class="band-name">ANFALL</span><span class="band-name" aria-hidden="true">ANFALL</span></span></h3></div>\n    </a><a class="band-row" href="https://www.instagram.com/re_flex_official/" target="_blank" rel="noopener noreferrer" aria-label="RE-FLEX, 23:00, Instagram">\n      <div class="band-disc"><img src="images/nf-05-c564673a.webp" width="384" height="127" alt="Logo kapely RE-FLEX" loading="lazy" decoding="async"></div>\n      <div class="band-copy"><div class="band-meta"><time datetime="2027-04-17T23:00:00+02:00">23:00</time><span class="band-link-icon" aria-hidden="true" style="visibility:hidden">↗</span></div>\n      <h3 class="band-strip"><span class="band-marquee"><span class="band-name">RE-FLEX</span><span class="band-name" aria-hidden="true">RE-FLEX</span></span></h3></div>\n    </a><a class="band-row" href="https://www.instagram.com/ztracenyklice_/" target="_blank" rel="noopener noreferrer" aria-label="ZTRACENÝ KLÍČE, 00:15, Instagram">\n      <div class="band-disc"><img src="images/nf-06-6fbca78e.webp" width="384" height="187" alt="Logo kapely ZTRACENÝ KLÍČE" loading="lazy" decoding="async"></div>\n      <div class="band-copy"><div class="band-meta"><time datetime="2027-04-18T00:15:00+02:00">00:15</time><span class="band-link-icon" aria-hidden="true" style="visibility:hidden">↗</span></div>\n      <h3 class="band-strip"><span class="band-marquee"><span class="band-name">ZTRACENÝ KLÍČE</span><span class="band-name" aria-hidden="true">ZTRACENÝ KLÍČE</span></span></h3></div>\n    </a></div></div></section>'
+          PENDING_DIGEST = '44ca608f9b057fe88319ac34b722920466060c84c1577b634c2fb589392c12da'
+          PERFORMERS = [{'@type': 'MusicGroup', 'name': 'STÍNOVLAS', 'url': 'https://kapelastinovlas.cz/', 'sameAs': ['https://www.instagram.com/kapela_stinovlas/', 'https://www.youtube.com/@Kapela_Stinovlas']}, {'@type': 'MusicGroup', 'name': 'ANFALL', 'sameAs': 'https://www.instagram.com/anfall_band/'}, {'@type': 'MusicGroup', 'name': 'RE-FLEX', 'sameAs': 'https://www.instagram.com/re_flex_official/'}, {'@type': 'MusicGroup', 'name': 'ZTRACENÝ KLÍČE', 'sameAs': 'https://www.instagram.com/ztracenyklice_/'}]
+          SECTION_RE = re.compile(r'<section\b[^>]*\bid="lineup"[^>]*>.*?</section>', re.S)
+          SCHEMA_RE = re.compile(r'(<script\b[^>]*\btype="application/ld\+json"[^>]*>)(.*?)(</script>)', re.S)
+          HIDDEN_CSS = ('/* Unannounced line-up: times and coloured strips only, on every screen. */\n'
+                        '#lineup .band-row{grid-template-columns:minmax(0,1fr);gap:0}\n')
+          START = datetime.fromisoformat('2026-11-20T00:00:00+01:00')
+          STOP = datetime.fromisoformat('2026-11-21T00:00:00+01:00')
+          MARKER = '.github/lineup-restored-20261120.json'
+          OPERATION = 'restore-lineup-20261120'
+          
+          
+          def note(message):
+              print(message, flush=True)
+              if os.environ.get('GITHUB_STEP_SUMMARY'):
+                  with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as f:
+                      f.write(message + '\n\n')
+          
+          
+          def normalized(text):
+              return re.sub(r'\s+', ' ', text).strip()
+          
+          
+          def restore_html(html):
+              sections = list(SECTION_RE.finditer(html))
+              if len(sections) != 1:
+                  raise ValueError('Expected exactly one lineup section; index.html was not changed.')
+              section = sections[0]
+              current_section = section.group()
+              digest = hashlib.sha256(normalized(current_section).encode()).hexdigest()
+              already_restored = normalized(current_section) == normalized(RESTORED_SECTION)
+              if not already_restored and digest != PENDING_DIGEST:
+                  raise ValueError('The lineup was edited since preparation. Refusing to overwrite newer changes.')
+              if not already_restored:
+                  html = html[:section.start()] + RESTORED_SECTION + html[section.end():]
+              if html.count(HIDDEN_CSS) > 1:
+                  raise ValueError('Duplicate temporary lineup styles; index.html was not changed.')
+              html = html.replace(HIDDEN_CSS, '', 1)
+          
+              matches = []
+              for script in SCHEMA_RE.finditer(html):
+                  data = json.loads(script.group(2))
+                  graph = data.get('@graph', [data]) if isinstance(data, dict) else data
+                  if not isinstance(graph, list):
+                      continue
+                  for event in graph:
+                      if isinstance(event, dict) and event.get('@id') == 'https://narezakfest.com/#event':
+                          matches.append((script, data, event))
+              if len(matches) != 1:
+                  raise ValueError('Expected one festival event in structured data; index.html was not changed.')
+              script, data, event = matches[0]
+              if 'performer' in event and event['performer'] != PERFORMERS:
+                  raise ValueError('The structured lineup was edited. Refusing to overwrite newer changes.')
+              if event.get('performer') != PERFORMERS:
+                  event['performer'] = PERFORMERS
+                  replacement = script.group(1) + '\n' + json.dumps(data, ensure_ascii=False, indent=2) + '\n' + script.group(3)
+                  html = html[:script.start()] + replacement + html[script.end():]
+              return html
+          
+          
+          def api(path, method='GET', payload=None):
+              repository = os.environ['GH_REPOSITORY']
+              if repository != 'marekstoll/narezakfest':
+                  raise ValueError('This workflow is intended only for marekstoll/narezakfest.')
+              request = urllib.request.Request(
+                  'https://api.github.com/repos/' + repository + path,
+                  data=None if payload is None else json.dumps(payload).encode(),
+                  method=method,
+                  headers={
+                      'Authorization': 'Bearer ' + os.environ['GH_TOKEN'],
+                      'Accept': 'application/vnd.github+json',
+                      'Content-Type': 'application/json',
+                      'X-GitHub-Api-Version': '2026-03-10',
+                      'User-Agent': 'Narezakfest-Lineup-Restore',
+                  },
+              )
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  body = response.read()
+                  return json.loads(body) if body else None
+          
+          
+          def read_index():
+              data = api('/contents/index.html?ref=main')
+              if data.get('encoding') != 'base64' or data.get('type') != 'file':
+                  raise ValueError('index.html could not be read as a regular UTF-8 file.')
+              return data, base64.b64decode(data['content']).decode('utf-8')
+          
+          
+          def marker_exists():
+              try:
+                  result = api('/contents/' + MARKER + '?ref=main')
+              except urllib.error.HTTPError as error:
+                  if error.code == 404:
+                      return False
+                  raise
+              data = json.loads(base64.b64decode(result['content']))
+              if data.get('operation') != OPERATION or data.get('status') != 'published':
+                  raise ValueError('Unexpected completion marker. No changes were made.')
+              return True
+          
+          
+          def mark_complete(commit):
+              data = {'operation': OPERATION, 'status': 'published', 'commit': commit,
+                      'confirmed_at': datetime.now(ZoneInfo('Europe/Prague')).isoformat()}
+              try:
+                  api('/contents/' + MARKER, 'PUT', {
+                      'message': 'Record successful lineup publication on 20 November 2026',
+                      'branch': 'main',
+                      'content': base64.b64encode((json.dumps(data, indent=2) + '\n').encode()).decode(),
+                  })
+              except urllib.error.HTTPError as error:
+                  if error.code not in (409, 422) or not marker_exists():
+                      raise
+              note('Hotovo: kapely, loga a odkazy jsou zveřejněné. Další plánované běhy už nic nezmění.')
+          
+          
+          def published_ready():
+              # The authentication token is never sent to the public website.
+              url = 'https://narezakfest.com/?lineup-check=' + str(time.time_ns())
+              request = urllib.request.Request(url, headers={'Cache-Control': 'no-cache', 'User-Agent': 'Narezakfest-Lineup-Check'})
+              try:
+                  with urllib.request.urlopen(request, timeout=20) as response:
+                      page = response.read().decode('utf-8')
+                  return restore_html(page) == page
+              except (ValueError, OSError, UnicodeError):
+                  return False
+          
+          
+          def run(now=None):
+              now = now or datetime.now(ZoneInfo('Europe/Prague'))
+              if now >= STOP:
+                  note('Termín 20. 11. 2026 již skončil. Žádné změny se neprovedou.')
+                  return
+              # Push always validates only, even on the target date.
+              publish = START <= now < STOP and os.environ.get('GH_EVENT_NAME') in ('schedule', 'workflow_dispatch')
+              if marker_exists():
+                  note('Obnovení již bylo dokončeno. Nic dalšího se nemění.')
+                  return
+              repository = api('')
+              pages = api('/pages')
+              source = pages.get('source') or {}
+              if repository.get('default_branch') != 'main' or pages.get('build_type') not in (None, 'legacy') or source.get('branch') != 'main' or source.get('path') != '/':
+                  raise ValueError('Expected GitHub Pages: Deploy from a branch, main, /(root). No settings were changed.')
+              tree = api('/git/trees/main?recursive=1')
+              if tree.get('truncated'):
+                  raise ValueError('Cannot verify the complete file list.')
+              files = {item['path'] for item in tree['tree'] if item['type'] == 'blob'}
+              images = re.findall(r'<img\b[^>]*\bsrc="([^"]+)"', RESTORED_SECTION)
+              if not all(image in files for image in images):
+                  raise ValueError('One or more original band logos are missing. index.html was not changed.')
+          
+              commit = None
+              changed = False
+              for attempt in range(3):
+                  current, html = read_index()
+                  restored = restore_html(html)
+                  if not publish:
+                      note('Kontrola úspěšná. Web se nezměnil. Automatické obnovení je připravené na 20. 11. 2026 od 00:07 českého času.')
+                      return
+                  if restored == html:
+                      commit = api('/git/ref/heads/main')['object']['sha']
+                      break
+                  try:
+                      result = api('/contents/index.html', 'PUT', {
+                          'message': 'Restore four-band lineup on 20 November 2026',
+                          'branch': 'main', 'sha': current['sha'],
+                          'content': base64.b64encode(restored.encode('utf-8')).decode(),
+                      })
+                      commit = result['commit']['sha']
+                      changed = True
+                      break
+                  except urllib.error.HTTPError as error:
+                      # Reload after a simultaneous edit; never overwrite a stale file.
+                      if error.code != 409 or attempt == 2:
+                          raise
+              if commit is None:
+                  raise RuntimeError('Could not update index.html safely.')
+              if not changed and published_ready():
+                  mark_complete(commit)
+                  return
+          
+              # GITHUB_TOKEN commits do not start Pages builds automatically.
+              api('/pages/builds', 'POST')
+              note('Line-up je připravený v index.html. Publikování GitHub Pages bylo vyžádáno.')
+              for attempt in range(24):
+                  build = api('/pages/builds/latest')
+                  if build.get('commit') == commit:
+                      if build.get('status') == 'errored':
+                          raise RuntimeError('GitHub Pages build failed. The next scheduled attempt can retry publication.')
+                      if build.get('status') == 'built' and published_ready():
+                          mark_complete(commit)
+                          return
+                  if attempt < 23:
+                      time.sleep(10)
+              raise RuntimeError('Publication was not confirmed yet. The next scheduled attempt can retry; the repository update is preserved.')
+          
+          
+          if __name__ == '__main__':
+              run()
+          PYTHON
